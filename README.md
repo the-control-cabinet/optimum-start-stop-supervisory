@@ -9,14 +9,14 @@
 
 > **The short version:**
 > - **When to heat** is decided per zone by learned **heat-up and cool-down rates** (°C/h, as a function of outdoor temperature), not by fixed schedule offsets.
-> - **The supervisor** (HA/Node-RED) holds the occupancy schedule and sends **temporary zone setpoints** to Evohome over **RAMSES-II**: local, no cloud, through the already-audited transmit path.
+> - **The supervisor** (Node-RED, on the [supervisory layer](https://github.com/the-control-cabinet/ha-node-red-supervisory-layer)) holds the occupancy schedule and sends **temporary zone setpoints** to Evohome over **RAMSES-II**: local, no cloud, through the already-audited transmit path.
 > - **Evohome keeps** room control, its HR92s and the UFH. Its own optimisation is switched off so the two don't fight.
 > - **Measured** against the plant-monitoring baseline: arrival accuracy (minutes early/late), heating hours, gas per degree-day.
 > - **Then the OpenTherm stage builds on it:** a flow-temperature **boost** during preheat shortens heat-up, and the rates are re-learned.
 
-**Delivery sequence:** A plant-monitoring baseline → **B optimum start/stop (this repo)** → D OpenTherm on the boiler (C, the rig exercises, runs in parallel). See the [portfolio hub](https://github.com/the-control-cabinet).
+**Delivery sequence:** A plant-monitoring baseline → B supervisory layer → **C optimum start/stop (this repo)** → E OpenTherm on the boiler (D, the PID rig exercise, runs in parallel). See the [portfolio hub](https://github.com/the-control-cabinet).
 
-**Portfolio position:** Management/automation level · supervisory control. Related: [Evohome & RAMSES-II](https://github.com/the-control-cabinet/evohome-heating-controls-ramses-integration) · [Heating plant monitoring](https://github.com/the-control-cabinet/heating-plant-monitoring-esphome) · [OpenTherm control](https://github.com/the-control-cabinet/opentherm-boiler-control-esphome) · [BLE presence](https://github.com/the-control-cabinet/esp32-ble-presence-network) · [Energy dashboard](https://github.com/the-control-cabinet/home-energy-dashboard)
+**Portfolio position:** Management/automation level · supervisory control. **Runs on:** [HA + Node-RED supervisory layer](https://github.com/the-control-cabinet/ha-node-red-supervisory-layer) (platform, command authority, fail-safe patterns). Related: [Evohome & RAMSES-II](https://github.com/the-control-cabinet/evohome-heating-controls-ramses-integration) · [Heating plant monitoring](https://github.com/the-control-cabinet/heating-plant-monitoring-esphome) · [OpenTherm control](https://github.com/the-control-cabinet/opentherm-boiler-control-esphome) · [BLE presence](https://github.com/the-control-cabinet/esp32-ble-presence-network) · [Energy dashboard](https://github.com/the-control-cabinet/home-energy-dashboard)
 
 ---
 
@@ -24,7 +24,7 @@
 
 | Layer | Decides | Delivered by |
 |---|---|---|
-| **Supervisory** | **When** each zone heats | **This repo** (HA/Node-RED → RAMSES-II) |
+| **Supervisory** | **When** each zone heats | **This repo**, on the [supervisory layer](https://github.com/the-control-cabinet/ha-node-red-supervisory-layer) (Node-RED → RAMSES-II) |
 | Zone control | Whether each room needs heat now | Evohome (unchanged) |
 | Plant control | How hard the boiler works | On/off today → [OpenTherm + PID](https://github.com/the-control-cabinet/opentherm-boiler-control-esphome) later |
 | Measurement | What happened | [Plant monitoring](https://github.com/the-control-cabinet/heating-plant-monitoring-esphome), RAMSES, [energy dashboard](https://github.com/the-control-cabinet/home-energy-dashboard) |
@@ -51,6 +51,7 @@ flowchart LR
 | [05 Building on it with OpenTherm](docs/05-opentherm-integration.md) | Preheat boost, re-learning, interactions |
 
 ## Roadmap
+- [ ] Prerequisite: the [supervisory layer](https://github.com/the-control-cabinet/ha-node-red-supervisory-layer) in place (Node-RED, command authority, heartbeat, proof flow)
 - [ ] Baseline: per-zone heat-up and cool-down data from the plant-monitoring period (step A)
 - [ ] Learning model running in "shadow mode": predicting start times, not acting
 - [ ] Live on 2-3 zones (one UFH, two radiator), then all zones

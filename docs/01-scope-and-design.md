@@ -28,6 +28,8 @@
 | Room control, HR92s, UFH | Unchanged | Evohome remains the zone controller |
 
 ## Command path and safety
+The platform rules (tiers, rate limits, read-back, audit log, heartbeat, kill switch) come from the [supervisory layer](https://github.com/the-control-cabinet/ha-node-red-supervisory-layer); this function follows them.
+
 - Commands go over **RAMSES-II** through the gateway, whose transmit side has already been audited (only reads and temporary setpoints are sent).
 - **Temporary** setpoints only, with an expiry, so a stuck supervisor can't leave a zone at comfort indefinitely.
 - **Fail-safe:** supervisor down means Evohome runs its baseline schedule.

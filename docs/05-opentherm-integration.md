@@ -10,4 +10,4 @@ Once the [OpenTherm stage](https://github.com/the-control-cabinet/opentherm-boil
 | **Re-learning** | Heat-up rates change with modulating control, so the model resets its weighting and re-learns |
 | **Optimum stop and low-flow running** | With modulation, early setback reduces flow temperature smoothly rather than cycling |
 | **Shared signals** | Preheat-active flag and target zones are published to HA for the OpenTherm node to consume |
-| **Measurement** | The before/after report separates the savings of B (this repo) and D (OpenTherm) |
+| **Measurement** | The before/after report (step F) separates the savings of C (this repo) and E (OpenTherm) |
