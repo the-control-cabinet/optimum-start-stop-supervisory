@@ -1,0 +1,20 @@
+# Outline only (design stage): HA helpers the supervisor uses per zone.
+input_datetime:
+  zone_example_occupied_start:
+    name: "Zone Example - occupied start"
+    has_date: false
+    has_time: true
+input_number:
+  zone_example_comfort_setpoint:
+    name: "Zone Example - comfort setpoint"
+    min: 15
+    max: 23
+    step: 0.5
+  zone_example_max_preheat_h:
+    name: "Zone Example - max preheat"
+    min: 0
+    max: 8
+    step: 0.5
+input_boolean:
+  optimum_start_stop_shadow_mode:
+    name: "Optimum start/stop - shadow mode"
