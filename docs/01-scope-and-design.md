@@ -17,6 +17,7 @@
 | Zone heat demand % | RAMSES-II |
 | Outdoor temperature | Weather integration / outdoor sensor |
 | Occupancy schedule (the **source of truth**) | HA schedule helpers per zone |
+| **Exception schedules** | Workday sensor (UK bank holidays) and household calendars: holidays, away periods and special days override the normal week, as BMS exception/holiday schedules do |
 | Optional live occupancy | BLE presence (Bermuda): skip preheat for rooms not in use |
 | **Output:** temporary zone setpoint | RAMSES-II command to the owning Evohome controller |
 

@@ -22,6 +22,11 @@ stop_time    = occupancy_end − clamp(coast_time, 0, max_early_stop)
 - **Max early stop:** e.g. 1 h radiators, 3 h UFH ⟨tune⟩.
 - Disabled when the outdoor temperature is extreme (frost risk, or a very cold night).
 
+## Exception schedules
+- **Holiday / away:** no optimum start; zones held at setback (frost protection only).
+- **Bank holiday:** use the weekend occupancy profile.
+- **Return from away:** preheat calculated for the planned return time.
+
 ## Fall-backs
 | Condition | Behaviour |
 |---|---|
